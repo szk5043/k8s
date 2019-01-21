@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# szk5043@foxmail.com
 MASTER_ADDRESS=${1:-"192.168.2.111"}
 ETCD_SERVERS=${2:-"http://127.0.0.1:2379"}
 
