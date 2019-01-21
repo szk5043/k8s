@@ -2,7 +2,7 @@
 
 MASTER_ADDRESS=${1:-"127.0.0.1"}
 
-cat <<EOF >/opt/kubernetes/conf/kube-controller-manager
+cat <<EOF >/opt/kubernetes/cfg/kube-controller-manager
 
 
 KUBE_CONTROLLER_MANAGER_OPTS="--logtostderr=true \\
@@ -19,13 +19,13 @@ KUBE_CONTROLLER_MANAGER_OPTS="--logtostderr=true \\
 
 EOF
 
-cat <<EOF >/etc/systemd/system/kube-controller-manager.service
+cat <<EOF >/lib/systemd/system/kube-controller-manager.service
 [Unit]
 Description=Kubernetes Controller Manager
 Documentation=https://github.com/kubernetes/kubernetes
 
 [Service]
-EnvironmentFile=-/opt/kubernetes/conf/kube-controller-manager
+EnvironmentFile=-/opt/kubernetes/cfg/kube-controller-manager
 ExecStart=/opt/kubernetes/bin/kube-controller-manager \$KUBE_CONTROLLER_MANAGER_OPTS
 Restart=on-failure
 

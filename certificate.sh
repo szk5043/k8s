@@ -47,9 +47,9 @@ cat > server-csr.json <<EOF
     "CN": "kubernetes",
     "hosts": [
       "127.0.0.1",
-      "192.168.2.111",
-      "192.168.2.112",
-      "192.168.2.113",
+      "192.168.0.211",
+      "192.168.0.212",
+      "192.168.0.213",
       "10.10.10.1",
       "kubernetes",
       "kubernetes.default",
@@ -122,4 +122,3 @@ cat > kube-proxy-csr.json <<EOF
 EOF
 
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes kube-proxy-csr.json | cfssljson -bare kube-proxy
-

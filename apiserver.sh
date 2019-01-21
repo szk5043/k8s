@@ -1,9 +1,9 @@
 #!/bin/bash
-# szk5043@foxmail.com
-MASTER_ADDRESS=${1:-"192.168.2.111"}
+
+MASTER_ADDRESS=${1:-"192.168.1.195"}
 ETCD_SERVERS=${2:-"http://127.0.0.1:2379"}
 
-cat <<EOF >/opt/kubernetes/conf/kube-apiserver
+cat <<EOF >/opt/kubernetes/cfg/kube-apiserver
 
 KUBE_APISERVER_OPTS="--logtostderr=true \\
 --v=4 \\
@@ -19,7 +19,7 @@ KUBE_APISERVER_OPTS="--logtostderr=true \\
 --authorization-mode=RBAC,Node \\
 --kubelet-https=true \\
 --enable-bootstrap-token-auth \\
---token-auth-file=/opt/kubernetes/conf/token.csv \\
+--token-auth-file=/opt/kubernetes/cfg/token.csv \\
 --service-node-port-range=30000-50000 \\
 --tls-cert-file=/opt/kubernetes/ssl/server.pem  \\
 --tls-private-key-file=/opt/kubernetes/ssl/server-key.pem \\
@@ -31,13 +31,13 @@ KUBE_APISERVER_OPTS="--logtostderr=true \\
 
 EOF
 
-cat <<EOF >/etc/systemd/system/kube-apiserver.service
+cat <<EOF >/lib/systemd/system/kube-apiserver.service
 [Unit]
 Description=Kubernetes API Server
 Documentation=https://github.com/kubernetes/kubernetes
 
 [Service]
-EnvironmentFile=-/opt/kubernetes/conf/kube-apiserver
+EnvironmentFile=-/opt/kubernetes/cfg/kube-apiserver
 ExecStart=/opt/kubernetes/bin/kube-apiserver \$KUBE_APISERVER_OPTS
 Restart=on-failure
 
