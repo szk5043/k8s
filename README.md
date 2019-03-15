@@ -1,2 +1,2 @@
-# k8s-script
-kubernetes configure script
+# k8s
+k8s文档、脚本、笔记本
